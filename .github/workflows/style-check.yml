@@ -1,0 +1,27 @@
+me: Style Check
+
+on: [pull_request]
+
+jobs:
+  build:
+    # Create a job on Ubuntu 18.04
+    name: Checking Python Style!
+    runs-on: ubuntu-18.04
+
+    steps:
+      # Copy github repo with submodules
+      - name: clone-repo
+        uses: actions/checkout@v1
+        with:
+          submodules: true
+      # Install python
+      - name: install-python
+        uses: actions/setup-python@v1
+        with:
+          python-version: '3.8'
+      # Install python style checker
+      - name: install-pycodestyle
+        run: python -m pip install pycodestyle
+      # Check style
+      - name: style-check
+        run: pycodestyle . --max-line-length=120 --exclude venv
