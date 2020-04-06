@@ -1,4 +1,4 @@
-me: Style Check
+name: Style Check
 
 on: [pull_request]
 
