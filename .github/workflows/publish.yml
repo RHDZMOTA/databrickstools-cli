@@ -1,0 +1,40 @@
+name: Style Check
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - prd
+
+jobs:
+  build:
+    # Check if PR was closed due to a merge.
+    if: github.event.pull_request.merged == true
+    # Create a job on Ubuntu 18.04
+    name: Checking Python Style!
+    runs-on: ubuntu-18.04
+    steps:
+      # Copy github repo with submodules
+      - name: clone-repo
+        uses: actions/checkout@v1
+        with:
+          submodules: true
+      # Install python
+      - name: install-python
+        uses: actions/setup-python@v1
+        with:
+          python-version: '3.8'
+      # Install python dependencies
+      - name: install-twine
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install setuptools wheel twine
+      # Build and publish!
+      - name: build-and-publish
+        env:
+          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+        run: |
+          python setup.py sdist
+          twine upload --skip-existing dist/*
