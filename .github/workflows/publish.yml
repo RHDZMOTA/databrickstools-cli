@@ -12,7 +12,7 @@ jobs:
     # Check if PR was closed due to a merge.
     if: github.event.pull_request.merged == true
     # Create a job on Ubuntu 18.04
-    name: Checking Python Style!
+    name: Build & Publish!
     runs-on: ubuntu-18.04
     steps:
       # Copy github repo with submodules

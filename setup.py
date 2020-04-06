@@ -6,7 +6,7 @@ with open("README.md") as file:
 
 setup(
     name="databrickstools",
-    version="0.1.3",
+    version="0.2.0",
     description="A simple commandline application to manage databricks resources.",
     long_description=readme,
     long_description_content_type='text/markdown',

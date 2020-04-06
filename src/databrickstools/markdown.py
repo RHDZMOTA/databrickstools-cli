@@ -5,11 +5,20 @@ from dataclasses import dataclass
 logger = logging.getLogger(__name__)
 
 block_initializer_pattern = {
-    "```scala": "scala",
-    "```tut": "scala",
-    "```py": "python",
-    "```sh": "sh",
-    "```sql": "sql"
+    "md": {
+        "```scala": "scala",
+        "```tut": "scala",
+        "```py": "python",
+        "```sh": "sh",
+        "```sql": "sql"
+    },
+    "rmd": {
+        "```tut": "scala",
+        "```{py": "python",
+        "```{sh": "sh",
+        "```{bash": "sh",
+        "```{sql": "sql"
+    },
 }
 
 block_comment_pattern = {
@@ -88,20 +97,21 @@ class MarkdownFile:
 
     @staticmethod
     def from_file(path: str, starting_lang: str = "md") -> 'MarkdownFile':
+        file_ending = path.lower().split(".")[-1]  # TODO: Fallback to DATABRICKSTOOLS_DEFAULT_FILE_ENDING
         blocks = [Block(lang=starting_lang)]
         with open(path, "r") as file:
             lines = file.readlines()
             content = file.read()
         for i, line in enumerate(lines):
             n_blocks = len(blocks)
-            for pattern, lang in block_initializer_pattern.items():
+            for pattern, lang in block_initializer_pattern[file_ending].items():
                 if line.startswith(pattern):
                     blocks.append(Block(lang=lang))
                     break
             new_block_added = len(blocks) > n_blocks
             if new_block_added:
                 continue
-            if line.startswith("```"):
+            if line.strip() == "```" and blocks[-1].lang != "md":
                 blocks.append(Block(lang="md"))
                 continue
             blocks[-1].append(Line(number=i, content=line))

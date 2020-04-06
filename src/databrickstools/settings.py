@@ -38,3 +38,8 @@ DATABRICKSTOOLS_DEFAULT_FORMAT = os.environ.get(
     "DATABRICKSTOOLS_DEFAULT_FORMAT",
     default="SOURCE"
 ).upper()
+
+DATABRICKSTOOLS_DEFAULT_FILE_ENDING = os.environ.get(
+    "DATABRICKSTOOLS_DEFAULT_FILE_ENDING",
+    default="Rmd"
+).lower()
