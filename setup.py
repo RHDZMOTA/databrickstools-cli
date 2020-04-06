@@ -4,12 +4,9 @@ from setuptools import setup, find_packages
 with open("README.md") as file:
     readme = file.read()
 
-with open("requirements.txt", "r") as file:
-    req = file.read()
-
 setup(
     name="databrickstools",
-    version="0.1.0",
+    version="0.1.2",
     description="A simple commandline application to manage databricks resources.",
     long_description=readme,
     long_description_content_type='text/markdown',
@@ -23,7 +20,10 @@ setup(
     ],
     package_dir={'': 'src'},
     packages=find_packages(where='src'),
-    install_requires=[r for r in req.split("\n") if r],
+    install_requires=[
+        "fire==0.3.0",
+        "requests==2.23.0"
+    ],
     python_requires='>=3.5, <4',
     entry_points={
       "console_scripts": [
