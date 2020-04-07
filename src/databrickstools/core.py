@@ -6,10 +6,10 @@ import fire
 from .databricks import DatabricksDirectoryManager, DatabricksExporter, DatabricksImporter, DatabricksLangs
 from .utils import pretty_print
 from .settings import (
-    DATABRICKSTOOLS_DATABRIKCS_TOKEN,
+    DATABRICKSTOOLS_DATABRICKS_TOKEN,
     DATABRICKSTOOLS_DEFAULT_LANGUAGE,
     DATABRICKSTOOLS_DEFAULT_FORMAT,
-    DATABRICKSTOOLS_DATABRIKCS_URL,
+    DATABRICKSTOOLS_DATABRICKS_URL,
     DATABRICKSTOOLS_LOG_LEVEL
 )
 
@@ -30,8 +30,8 @@ class ImportingCLI:
     def _file(from_path: str, to_path: str, import_method: str, base_language: str, overwrite: bool):
         logger.info(f"Importing file from {from_path} into Databricks ({to_path}).")
         importer = DatabricksImporter(
-            databricks_url=DATABRICKSTOOLS_DATABRIKCS_URL,
-            token=DATABRICKSTOOLS_DATABRIKCS_TOKEN,
+            databricks_url=DATABRICKSTOOLS_DATABRICKS_URL,
+            token=DATABRICKSTOOLS_DATABRICKS_TOKEN,
             default_lang=DATABRICKSTOOLS_DEFAULT_LANGUAGE,
             default_overwrite=overwrite
         )
@@ -74,8 +74,8 @@ class ExportingCLI:
 
     def __init__(self):
         self._exporter = DatabricksExporter(
-            databricks_url=DATABRICKSTOOLS_DATABRIKCS_URL,
-            token=DATABRICKSTOOLS_DATABRIKCS_TOKEN
+            databricks_url=DATABRICKSTOOLS_DATABRICKS_URL,
+            token=DATABRICKSTOOLS_DATABRICKS_TOKEN
         )
 
     def _file(self, from_path: str, to_path: str, export_method: str, **kwargs):
@@ -105,8 +105,8 @@ class Main:
         self.upload = ImportingCLI()
         self.download = ExportingCLI()
         self._directory_manager = DatabricksDirectoryManager(
-            databricks_url=DATABRICKSTOOLS_DATABRIKCS_URL,
-            token=DATABRICKSTOOLS_DATABRIKCS_TOKEN
+            databricks_url=DATABRICKSTOOLS_DATABRICKS_URL,
+            token=DATABRICKSTOOLS_DATABRICKS_TOKEN
         )
 
     @pretty_print(logger)
