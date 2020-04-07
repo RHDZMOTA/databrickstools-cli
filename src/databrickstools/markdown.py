@@ -1,5 +1,5 @@
 import logging
-from typing import List, Optional
+from typing import List, Optional, Tuple
 from dataclasses import dataclass
 
 logger = logging.getLogger(__name__)
@@ -41,7 +41,7 @@ class Block:
 
     def __init__(self, lang: str, lines: Optional[List[Line]] = None):
         self.lang = lang
-        self.lines = [] if not lines else lines
+        self.lines: List[Line] = [] if not lines else lines
 
     @property
     def comment_pattern(self):
@@ -49,7 +49,7 @@ class Block:
 
     @property
     def content(self) -> str:
-        content = "\n".join(line.content for line in self.lines)
+        content = "".join(line.content for line in self.lines)
         return content
 
     def as_databricks_block(self, global_lang_comment) -> str:
@@ -86,6 +86,27 @@ class MarkdownFile:
     @property
     def n_blocks(self) -> int:
         return len(self.blocks)
+
+    def get_lines(self) -> List[Tuple[str, Line]]:
+        return [
+            (block.lang, line)
+            for block in self.blocks
+            for line in block.lines
+            ]
+
+    def to_script(self, lang: str, blank: bool = True) -> str:
+        if not blank:
+            lines = [
+                line.content
+                for line_lang, line in self.get_lines()
+                if line_lang == lang
+            ]
+        else:
+            lines = [
+                line.content if line_lang == lang else ""
+                for line_lang, line in self.get_lines()
+            ]
+        return "".join(lines)
 
     def databricks_source_content(self, global_lang: str) -> str:
         return "\n".join(
