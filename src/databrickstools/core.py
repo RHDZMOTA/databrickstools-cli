@@ -10,7 +10,8 @@ from .settings import (
     DATABRICKSTOOLS_DEFAULT_LANGUAGE,
     DATABRICKSTOOLS_DEFAULT_FORMAT,
     DATABRICKSTOOLS_DATABRICKS_URL,
-    DATABRICKSTOOLS_LOG_LEVEL
+    DATABRICKSTOOLS_LOG_LEVEL,
+    databricks_environment_check
 )
 
 logger = logging.getLogger(__name__)
@@ -102,6 +103,7 @@ class ExportingCLI:
 class Main:
 
     def __init__(self):
+        databricks_environment_check()
         self.upload = ImportingCLI()
         self.download = ExportingCLI()
         self._directory_manager = DatabricksDirectoryManager(
