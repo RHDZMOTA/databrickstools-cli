@@ -8,15 +8,9 @@ DATABRICKSTOOLS_DATABRICKS_URL = os.environ.get(
     "DATABRICKSTOOLS_DATABRICKS_URL"
 )
 
-if DATABRICKSTOOLS_DATABRICKS_URL is None:
-    raise ValueError("Missing environment variable: DATABRICKSTOOLS_DATABRIKCS_URL")
-
 DATABRICKSTOOLS_DATABRICKS_TOKEN = os.environ.get(
     "DATABRICKSTOOLS_DATABRICKS_TOKEN"
 )
-
-if DATABRICKSTOOLS_DATABRICKS_TOKEN is None:
-    raise ValueError("Missing environment variable: DATABRICKSTOOLS_DATABRICKS_TOKEN")
 
 DATABRICKSTOOLS_LOG_LEVEL = os.environ.get(
     "DATABRICKSTOOLS_LOG_LEVEL",
@@ -43,3 +37,10 @@ DATABRICKSTOOLS_DEFAULT_FILE_ENDING = os.environ.get(
     "DATABRICKSTOOLS_DEFAULT_FILE_ENDING",
     default="Rmd"
 ).lower()
+
+
+def databricks_environment_check():
+    if DATABRICKSTOOLS_DATABRICKS_URL is None:
+        raise ValueError("Missing environment variable: DATABRICKSTOOLS_DATABRIKCS_URL")
+    if DATABRICKSTOOLS_DATABRICKS_TOKEN is None:
+        raise ValueError("Missing environment variable: DATABRICKSTOOLS_DATABRICKS_TOKEN")

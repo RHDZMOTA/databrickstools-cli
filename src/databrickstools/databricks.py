@@ -9,7 +9,7 @@ from .markdown import MarkdownFile
 from .settings import (
     DATABRICKSTOOLS_DEFAULT_FORMAT,
     DATABRICKSTOOLS_DEFAULT_LANGUAGE,
-    DATABRICKSTOOLS_DEFAULT_OVERWRITE_FLAG
+    DATABRICKSTOOLS_DEFAULT_OVERWRITE_FLAG,
 )
 
 logger = logging.getLogger(__name__)
