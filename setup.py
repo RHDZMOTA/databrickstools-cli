@@ -6,7 +6,7 @@ with open("README.md") as file:
 
 setup(
     name="databrickstools",
-    version="0.3.1",
+    version="0.3.2",
     description="A simple commandline application to manage databricks resources.",
     long_description=readme,
     long_description_content_type='text/markdown',
@@ -21,8 +21,8 @@ setup(
     package_dir={'': 'src'},
     packages=find_packages(where='src'),
     install_requires=[
-        "fire==0.3.0",
-        "requests==2.23.0"
+        "fire>=0.3.0",
+        "requests>=2.23.0",
     ],
     python_requires='>=3.5, <4',
     entry_points={

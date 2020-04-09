@@ -23,7 +23,13 @@ $ databrickstools upload markdown \
 
 ## Setup
 
-Clone the repository and install the commandline application!
+Install via `pip`:
+
+```commandline
+$ pip install databrickstools
+```
+
+Or clone the repository and install the commandline application!
 
 1. Clone: `git clone https://github.com/rhdzmota/databrickstools-cli`
 1. Install: `pip install -e databrickstools-cli`
