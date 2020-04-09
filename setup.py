@@ -21,8 +21,8 @@ setup(
     package_dir={'': 'src'},
     packages=find_packages(where='src'),
     install_requires=[
-        "fire==0.3.0",
-        "requests==2.23.0"
+        "fire>=0.3.0",
+        "requests>=2.23.0",
     ],
     python_requires='>=3.5, <4',
     entry_points={
